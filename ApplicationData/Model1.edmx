@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Ychet_pacxodovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Otdel">
+          <Key>
+            <PropertyRef Name="kod_otdela" />
+          </Key>
+          <Property Name="kod_otdela" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="kolvo_cotryd" Type="int" />
+        </EntityType>
+        <EntityType Name="Racxod">
+          <Key>
+            <PropertyRef Name="kod_racxoda" />
+          </Key>
+          <Property Name="kod_racxoda" Type="int" Nullable="false" />
+          <Property Name="cymma" Type="float" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="kod_otdela" Type="int" Nullable="false" />
+          <Property Name="kod_vida" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="idRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vid_racxodov">
+          <Key>
+            <PropertyRef Name="kod_vida" />
+          </Key>
+          <Property Name="kod_vida" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="opicanie" Type="nvarchar" MaxLength="400" />
+          <Property Name="predel_norma" Type="float" />
+        </EntityType>
+        <Association Name="FK_Racxod_Otdel">
+          <End Role="Otdel" Type="Self.Otdel" Multiplicity="1" />
+          <End Role="Racxod" Type="Self.Racxod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdel">
+              <PropertyRef Name="kod_otdela" />
+            </Principal>
+            <Dependent Role="Racxod">
+              <PropertyRef Name="kod_otdela" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racxod_Vid_racxodov">
+          <End Role="Vid_racxodov" Type="Self.Vid_racxodov" Multiplicity="1" />
+          <End Role="Racxod" Type="Self.Racxod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vid_racxodov">
+              <PropertyRef Name="kod_vida" />
+            </Principal>
+            <Dependent Role="Racxod">
+              <PropertyRef Name="kod_vida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Ychet_pacxodovModelContainer">
+          <EntitySet Name="Otdel" EntityType="Self.Otdel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racxod" EntityType="Self.Racxod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vid_racxodov" EntityType="Self.Vid_racxodov" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Racxod_Otdel" Association="Self.FK_Racxod_Otdel">
+            <End Role="Otdel" EntitySet="Otdel" />
+            <End Role="Racxod" EntitySet="Racxod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racxod_Vid_racxodov" Association="Self.FK_Racxod_Vid_racxodov">
+            <End Role="Vid_racxodov" EntitySet="Vid_racxodov" />
+            <End Role="Racxod" EntitySet="Racxod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ychet_pacxodovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Otdel">
+          <Key>
+            <PropertyRef Name="kod_otdela" />
+          </Key>
+          <Property Name="kod_otdela" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kolvo_cotryd" Type="Int32" />
+          <NavigationProperty Name="Racxod" Relationship="Self.FK_Racxod_Otdel" FromRole="Otdel" ToRole="Racxod" />
+        </EntityType>
+        <EntityType Name="Racxod">
+          <Key>
+            <PropertyRef Name="kod_racxoda" />
+          </Key>
+          <Property Name="kod_racxoda" Type="Int32" Nullable="false" />
+          <Property Name="cymma" Type="Double" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="kod_otdela" Type="Int32" Nullable="false" />
+          <Property Name="kod_vida" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Otdel" Relationship="Self.FK_Racxod_Otdel" FromRole="Racxod" ToRole="Otdel" />
+          <NavigationProperty Name="Vid_racxodov" Relationship="Self.FK_Racxod_Vid_racxodov" FromRole="Racxod" ToRole="Vid_racxodov" />
+        </EntityType>
+        <EntityType Name="Vid_racxodov">
+          <Key>
+            <PropertyRef Name="kod_vida" />
+          </Key>
+          <Property Name="kod_vida" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="opicanie" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="predel_norma" Type="Double" />
+          <NavigationProperty Name="Racxod" Relationship="Self.FK_Racxod_Vid_racxodov" FromRole="Vid_racxodov" ToRole="Racxod" />
+        </EntityType>
+        <Association Name="FK_Racxod_Otdel">
+          <End Role="Otdel" Type="Self.Otdel" Multiplicity="1" />
+          <End Role="Racxod" Type="Self.Racxod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdel">
+              <PropertyRef Name="kod_otdela" />
+            </Principal>
+            <Dependent Role="Racxod">
+              <PropertyRef Name="kod_otdela" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racxod_Vid_racxodov">
+          <End Role="Vid_racxodov" Type="Self.Vid_racxodov" Multiplicity="1" />
+          <End Role="Racxod" Type="Self.Racxod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vid_racxodov">
+              <PropertyRef Name="kod_vida" />
+            </Principal>
+            <Dependent Role="Racxod">
+              <PropertyRef Name="kod_vida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ychet_pacxodovEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Otdel" EntityType="Self.Otdel" />
+          <EntitySet Name="Racxod" EntityType="Self.Racxod" />
+          <EntitySet Name="Vid_racxodov" EntityType="Self.Vid_racxodov" />
+          <AssociationSet Name="FK_Racxod_Otdel" Association="Self.FK_Racxod_Otdel">
+            <End Role="Otdel" EntitySet="Otdel" />
+            <End Role="Racxod" EntitySet="Racxod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racxod_Vid_racxodov" Association="Self.FK_Racxod_Vid_racxodov">
+            <End Role="Vid_racxodov" EntitySet="Vid_racxodov" />
+            <End Role="Racxod" EntitySet="Racxod" />
+          </AssociationSet>
+          <EntitySet Name="Role" EntityType="Ychet_pacxodovModel.Role" />
+          <EntitySet Name="User" EntityType="Ychet_pacxodovModel.User" />
+          <AssociationSet Name="FK_User_Role" Association="Ychet_pacxodovModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Ychet_pacxodovModel.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Ychet_pacxodovModel.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_User_Role">
+          <End Type="Ychet_pacxodovModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="Ychet_pacxodovModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Ychet_pacxodovModelContainer" CdmEntityContainer="Ychet_pacxodovEntities">
+          <EntitySetMapping Name="Otdel">
+            <EntityTypeMapping TypeName="Ychet_pacxodovModel.Otdel">
+              <MappingFragment StoreEntitySet="Otdel">
+                <ScalarProperty Name="kod_otdela" ColumnName="kod_otdela" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="kolvo_cotryd" ColumnName="kolvo_cotryd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racxod">
+            <EntityTypeMapping TypeName="Ychet_pacxodovModel.Racxod">
+              <MappingFragment StoreEntitySet="Racxod">
+                <ScalarProperty Name="kod_racxoda" ColumnName="kod_racxoda" />
+                <ScalarProperty Name="cymma" ColumnName="cymma" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="kod_otdela" ColumnName="kod_otdela" />
+                <ScalarProperty Name="kod_vida" ColumnName="kod_vida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vid_racxodov">
+            <EntityTypeMapping TypeName="Ychet_pacxodovModel.Vid_racxodov">
+              <MappingFragment StoreEntitySet="Vid_racxodov">
+                <ScalarProperty Name="kod_vida" ColumnName="kod_vida" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="opicanie" ColumnName="opicanie" />
+                <ScalarProperty Name="predel_norma" ColumnName="predel_norma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Ychet_pacxodovModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Ychet_pacxodovModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

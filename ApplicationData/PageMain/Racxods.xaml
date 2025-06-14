@@ -1,0 +1,55 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ychet_racxodov.ApplicationData.PageMain"
+      xmlns:ApplicationData="clr-namespace:Ychet_racxodov.ApplicationData" x:Class="Ychet_racxodov.ApplicationData.PageMain.Racxods"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Racxods">
+
+    <Grid Background="#FFFEFBFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="30" Grid.Row="1" VerticalAlignment="Top" Width="800">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnMenu" Content="В меню" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Click="btnMenu_Click"/>
+            <Button x:Name="btnAdd" Content="Добавить" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Click="btnAdd_Click"/>
+            <Button x:Name="btnTransf" Content="Изменить" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Click="btnTransf_Click"/>
+            <Button x:Name="btnDel" Content="Удалить" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Click="btnDel_Click"/>
+            <Button x:Name="btnFind" Content="Найти" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Click="btnFind_Click">
+                <Button.DataContext>
+                    <ApplicationData:Racxod/>
+                </Button.DataContext>
+            </Button>
+            <TextBox Grid.Column="5" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="100"/>
+            <TextBlock Grid.Column="6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выделите ячейку в нужной строке для добавления, редактирования или удаления" VerticalAlignment="Top" Height="30" Width="300"/>
+
+        </Grid>
+        <DataGrid x:Name="AllRacxods" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="Cell" Loaded="AllRacxods_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding kod_racxoda}" ClipboardContentBinding="{x:Null}" Header="Код расхода" Width="80*"/>
+                <DataGridTextColumn Binding="{Binding cymma}" ClipboardContentBinding="{x:Null}" Header="Сумма" Width="80*"/>
+                <DataGridTextColumn Binding="{Binding data}" ClipboardContentBinding="{x:Null}" Header="Дата" Width="80*"/>
+                <DataGridTextColumn Binding="{Binding kod_otdela}" ClipboardContentBinding="{x:Null}" Header="Код отдела" Width="80*"/>
+                <DataGridTextColumn Binding="{Binding kod_vida}" ClipboardContentBinding="{x:Null}" Header="Код вида" Width="80*"/>
+            </DataGrid.Columns>
+            <DataGrid.DataContext>
+                <ApplicationData:Racxod/>
+            </DataGrid.DataContext>
+        </DataGrid>
+
+
+    </Grid>
+</Page>
